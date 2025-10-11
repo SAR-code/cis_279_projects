@@ -1,9 +1,8 @@
 /*************************************************************
- * Program : Main.java
- * Purpose : This demonstrates the customer class and the
- *           credit card account class objects by reading
- *           a txt file and creating new account and
- *           customer classes.
+ * Program : Customer.java
+ * Purpose : This file contains the class definition and implementation
+ *           of the Customer Class. It contains attributes and methods
+ *           required for the customer data
  *
  * Created : 10/10/2025
  * Programmer : D. McCallum
