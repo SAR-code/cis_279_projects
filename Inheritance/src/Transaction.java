@@ -11,6 +11,8 @@
  ***********************************************************/
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Transaction {
 
@@ -19,11 +21,33 @@ public class Transaction {
     private double amount;
     private LocalDate date;
 
-    // Declare constructor
-    public Transaction(String transactionType, double amount){
+
+    public Transaction(String transactionType, double amount, String dateString){
         this.transactionType = transactionType;
         this.amount = amount;
-        this.date = LocalDate.now();
+        this.date = parseDate(dateString);
+    }
+
+    // Parse a date string using common patterns
+    private static LocalDate parseDate(String dateString) {
+        if (dateString == null || dateString.isBlank()) {
+            throw new IllegalArgumentException("Date string cannot be null or empty");
+        }
+
+
+        try {
+            return LocalDate.parse(dateString);
+        } catch (DateTimeParseException ignored) { }
+
+        String[] patterns = {"M/d/yyyy", "MM/dd/yyyy", "M-d-yyyy", "MM-dd-yyyy", "d-M-yyyy", "d/M/yyyy", "yyyy/MM/dd"};
+        for (String p : patterns) {
+            try {
+                DateTimeFormatter f = DateTimeFormatter.ofPattern(p);
+                return LocalDate.parse(dateString, f);
+            } catch (DateTimeParseException ignored) { }
+        }
+
+        throw new IllegalArgumentException("Unrecognized date format: " + dateString + " (expected yyyy-MM-dd or similar)");
     }
 
     // Declare getter methods
@@ -38,6 +62,7 @@ public class Transaction {
     // Declare toString method for output
     @Override
     public String toString() {
-        return date + " - " + transactionType + ": $" + String.format("%.2f", amount);
+        DateTimeFormatter out = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return date.format(out) + " - " + transactionType + ": $" + String.format("%.2f", amount);
     }
 }

@@ -17,6 +17,7 @@ public abstract class Account {
     protected String accountNumber;
     protected String fullName;
     protected double balance;
+    protected double initialBalance;
     protected LinkedList<Transaction> transaction;
 
     // Declare default constructor
@@ -24,6 +25,7 @@ public abstract class Account {
         this.accountNumber = accountNumber;
         this.fullName = fullName;
         this.balance = balance;
+        this.initialBalance = balance;
         this.transaction = new LinkedList<>();
     }
 
@@ -46,6 +48,7 @@ public abstract class Account {
     public String toString(){
         return "Account Number: " + accountNumber +
                 "\nOwner: " + fullName +
-                "\nBalance: " + String.format("%.2f", balance);
+                "\nInitial Balance: " + String.format("%.2f", initialBalance) +
+                "\nCurrent Balance: " + String.format("%.2f", balance);
     }
 }

@@ -37,26 +37,26 @@ public class Driver {
         accounts.add(testMortgageTwo);
 
         // Create and process four transactions for each checking account
-        testAccountOne.processTransaction(new Transaction("Deposit", 1000.00));
-        testAccountOne.processTransaction(new Transaction("Check", 500.00));
-        testAccountOne.processTransaction(new Transaction("Deposit", 2000.00));
-        testAccountOne.processTransaction(new Transaction("Check", 700.00));
+        testAccountOne.processTransaction(new Transaction("Deposit", 1000.00, "2025-10-15"));
+        testAccountOne.processTransaction(new Transaction("Check", 500.00, "10/20/2025"));
+        testAccountOne.processTransaction(new Transaction("Deposit", 2000.00, "2025-10-25"));
+        testAccountOne.processTransaction(new Transaction("Check", 700.00, "11-01-2025"));
 
-        testAccountTwo.processTransaction(new Transaction("Deposit", 5000.00));
-        testAccountTwo.processTransaction(new Transaction("Check", 300.00));
-        testAccountTwo.processTransaction(new Transaction("Deposit", 1000.00));
-        testAccountTwo.processTransaction(new Transaction("Check", 2000.00));
+        testAccountTwo.processTransaction(new Transaction("Deposit", 5000.00, "2025/09/01"));
+        testAccountTwo.processTransaction(new Transaction("Check", 300.00, "2025-09-05"));
+        testAccountTwo.processTransaction(new Transaction("Deposit", 1000.00, "9-15-2025"));
+        testAccountTwo.processTransaction(new Transaction("Check", 2000.00, "2025-09-30"));
 
         // Create and process four transactions for each mortgage account
-        testMortgageOne.processTransaction(new Transaction("Payment", 4700.00));
-        testMortgageOne.processTransaction(new Transaction("Payment", 4700.00));
-        testMortgageOne.processTransaction(new Transaction("Payment", 4700.00));
-        testMortgageOne.processTransaction(new Transaction("Payment", 4700.00));
+        testMortgageOne.processTransaction(new Transaction("Payment", 4700.00, "2025-08-01"));
+        testMortgageOne.processTransaction(new Transaction("Payment", 4700.00, "2025-09-01"));
+        testMortgageOne.processTransaction(new Transaction("Payment", 4700.00, "2025-10-01"));
+        testMortgageOne.processTransaction(new Transaction("Payment", 4700.00, "2025-11-01"));
 
-        testMortgageTwo.processTransaction(new Transaction("Payment", 1875.00));
-        testMortgageTwo.processTransaction(new Transaction("Payment", 1875.00));
-        testMortgageTwo.processTransaction(new Transaction("Payment", 1875.00));
-        testMortgageTwo.processTransaction(new Transaction("Payment", 1875.00));
+        testMortgageTwo.processTransaction(new Transaction("Payment", 1875.00, "2025-08-15"));
+        testMortgageTwo.processTransaction(new Transaction("Payment", 1875.00, "2025-09-15"));
+        testMortgageTwo.processTransaction(new Transaction("Payment", 1875.00, "2025-10-15"));
+        testMortgageTwo.processTransaction(new Transaction("Payment", 1875.00, "2025-11-15"));
 
         // Iterate through the LinkedList and output the results
         for (Account acc : accounts) {

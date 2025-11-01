@@ -15,6 +15,7 @@ public class Mortgage extends Account {
     // Declare private members specific to mortgage class
     private double annualInterestRate;
     private double monthlyPayment;
+    private final int numberOfPayments = 360;
 
     // Constructor to initialize additional fields
     public Mortgage(String accountNumber, String fullName, double balance,
@@ -27,7 +28,7 @@ public class Mortgage extends Account {
     // Declare method to calculate monthly payment based on interest rate
     private double calculateMonthlyPayment() {
         double monthlyRate = (annualInterestRate / 100) / 12;
-        int numberOfPayments = 360;
+
 
         return (balance * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -numberOfPayments));
     }
@@ -37,6 +38,23 @@ public class Mortgage extends Account {
         return balance * ((annualInterestRate / 100) / 12);
     }
 
+    // Count how many payment transactions have been made for this mortgage
+    public int getPaymentsMade() {
+        int count = 0;
+        for (Transaction t : transaction) {
+            if (t.getTransactionType() != null && t.getTransactionType().equalsIgnoreCase("Payment")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    // Get remaining payments
+    public int getRemainingPayments() {
+        int remaining = numberOfPayments - getPaymentsMade();
+        return Math.max(0, remaining);
+    }
+
     // Implement abstract methods
     @Override
     public void processTransaction(Transaction t){
@@ -44,18 +62,23 @@ public class Mortgage extends Account {
         // payments specific to mortgages
         if (t.getTransactionType().equalsIgnoreCase("Payment")) {
             double interest = calculateMonthlyInterest();
-            double principal = t.getAmount() - interest;  // Payment minus interest
-            balance -= principal; // Reduce loan balance
-            transaction.add(t); // Record the transaction
+            double principal = t.getAmount() - interest;
+            balance -= principal;
+            transaction.add(t);
         }
     }
 
     // Override toString to include interest and payment info
     @Override
     public String toString() {
+        int paid = getPaymentsMade();
+        int remaining = getRemainingPayments();
         return "Mortgage Account\n" + super.toString() +
                 "\nAnnual Interest Rate: " + annualInterestRate + "%" +
-                "\nMonthly Payment: " + String.format("%.2f", monthlyPayment);
+                "\nMonthly Payment: " + String.format("%.2f", monthlyPayment) +
+                "\nPayments Made: " + paid +
+                "\nRemaining Payments: " + remaining +
+                "\nCurrent Term: " + paid + " of " + numberOfPayments;
     }
 
 
