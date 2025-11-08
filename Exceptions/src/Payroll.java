@@ -1,3 +1,15 @@
+/*************************************************************
+ * Program : Payroll.java
+ * Purpose : This program demonstrates the use of Exceptions and
+ *           Text File I/O by reading employee payroll data from a file.
+ * Created : 11/08/2025
+ * Programmer : D. McCallum
+ ******************* Change history *********************
+ * Programmer Date Description of change
+ *
+ * N/A.
+ ***********************************************************/
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
